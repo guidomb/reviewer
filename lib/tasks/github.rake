@@ -11,8 +11,9 @@ namespace :github do
   end
 
   desc 'Edit webhook URL'
-  task :edit_webhook_url, [:owner,:repo,:id,:url] => :environment do |t, args|
-    github.edit_webhook_url(args[:owner], args[:repo], args[:id], args[:url])
+  task :edit_webhook_url, [:owner,:repo,:url] => :environment do |t, args|
+    id = github.fetch_webhook_id(args[:owner], args[:repo])
+    github.edit_webhook_url(args[:owner], args[:repo], id, args[:url])
   end
 
   def github
