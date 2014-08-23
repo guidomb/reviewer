@@ -22,13 +22,13 @@ describe GithubConfig do
   it { should respond_to(:github_webhook_secret) }
 
   describe "#github_access_token" do
-    it "should return the configured access token" do
+    it "returns the configured access token" do
       expect(subject.github_access_token).to be(github_config.access_token)
     end
   end
 
   describe "#github_webhook_secret" do
-    it "should return the configured webhook secret" do
+    it "returns the configured webhook secret" do
       expect(subject.github_webhook_secret).to be(github_config.webhook_secret)
     end
   end
