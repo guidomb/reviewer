@@ -17,8 +17,15 @@ class Github
   end
 
   def create_webhooks!(owner, repo_name)
-    github_client.create_hook(repo_full_name(owner, repo_name), WEBHOOK_NAME, 
-                              webhooks_config, webhooks_options)
+    response = github_client.create_hook(repo_full_name(owner, repo_name), 
+                                         WEBHOOK_NAME, webhooks_config, 
+                                         webhooks_options)
+    response.id
+  end
+
+  def edit_webhook_url(owner, repo_name, id, url)
+    github_client.edit_hook(repo_full_name(owner, repo_name), id, WEBHOOK_NAME, 
+                            webhooks_config.merge(url: url), webhooks_options)
   end
 
   private
@@ -50,7 +57,7 @@ class Github
         url: webhook_url,
         content_type: :json,
         secret: webhook_secret,
-        insecure_ssl: true
+        insecure_ssl: false
       }
     end
 

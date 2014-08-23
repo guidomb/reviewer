@@ -6,7 +6,13 @@ namespace :github do
 
   desc 'Creates webhooks for a repo'
   task :create_webhook, [:owner, :repo] => :environment do |t, args|
-    github.create_webhooks!(args[:owner], args[:repo])
+    hook_id = github.create_webhooks!(args[:owner], args[:repo])
+    puts "The created hook ID is #{hook_id}."
+  end
+
+  desc 'Edit webhook URL'
+  task :edit_webhook_url, [:owner,:repo,:id,:url] => :environment do |t, args|
+    github.edit_webhook_url(args[:owner], args[:repo], args[:id], args[:url])
   end
 
   def github
