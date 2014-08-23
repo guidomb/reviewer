@@ -16,9 +16,34 @@ describe Github do
       active: true
     }
   end
+  let(:github_options) { { webhook_secret: webhook_secret, webhook_url: webhook_url } }
 
-  subject(:github) { Github.new(client, webhook_secret: webhook_secret, webhook_url: webhook_url) }
+  subject(:github) { Github.new(client, github_options) }
   
+  describe ".new" do
+
+    context "when a nil client is provided" do
+
+      subject(:github) { Github.new(nil, github_options) }
+
+      specify { expect { github }.to raise_error(ArgumentError) }
+
+    end
+
+    [:webhook_secret, :webhook_url].each do |option|
+    
+      context "when a #{option.to_s.gsub('_', ' ')} is not provided" do
+
+        subject(:github) { Github.new(client, github_options.merge(option => nil)) }
+
+        specify { expect { github }.to raise_error(Github::MissingOptionError) }
+
+      end
+    
+    end
+
+  end
+
   describe "#create_webhooks!" do
 
     let(:response) { OpenStruct.new(id: hook_id) }
