@@ -28,6 +28,13 @@ class Github
                             webhooks_config.merge(url: url), webhooks_options)
   end
 
+  def fetch_webhook_id(owner, repo_name)
+    hooks = github_client.hooks(repo_full_name(owner, repo_name)).select do |hook|
+      hook.name == WEBHOOK_NAME
+    end
+    hooks.first.id
+  end
+
   private
 
     def validate_github_client(github_client)

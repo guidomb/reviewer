@@ -9,6 +9,7 @@ describe Github do
   let(:webhook_secret) { 'foo' }
   let(:client) { instance_double(Octokit::Client) }
   let(:webhook_events) { ['pull_request'] }
+  let(:hook_id) { 1 }
   let(:options) do
     {
       events: webhook_events,
@@ -20,7 +21,6 @@ describe Github do
   
   describe "#create_webhooks!" do
 
-    let(:hook_id) { 1 }
     let(:response) { OpenStruct.new(id: hook_id) }
     let(:config) do 
       {
@@ -47,7 +47,7 @@ describe Github do
   end
 
   describe "#edit_webhook_url" do
-    let(:hook_id) { 1 }
+    
     let(:new_url) { 'http://reviewer.wolox.com/hooks' }
     let(:config) do 
       {
@@ -66,6 +66,24 @@ describe Github do
     it "tells the github client to edit the hook" do
       github.edit_webhook_url(owner, repo, hook_id, new_url)
     end
+  end
+
+  describe "#fetch_webhook_id" do
+
+    let(:response) { [OpenStruct.new(id: hook_id, name: Github::WEBHOOK_NAME)] }
+
+    before(:each) do
+      expect(client).to receive(:hooks).with(full_repo_name).and_return(response)
+    end
+
+    it "tells the github client to fetch all the hooks for the given repository" do
+      github.fetch_webhook_id(owner, repo)
+    end
+
+    it "returns the hook id" do
+      expect(github.fetch_webhook_id(owner, repo)).to eq(hook_id)
+    end
+
   end
 
 end
