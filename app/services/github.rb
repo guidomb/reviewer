@@ -17,8 +17,7 @@ class Github
   end
 
   def create_webhooks!(owner, repo_name)
-    repo_full_name = "#{owner}/#{repo_name}"
-    github_client.create_hook(repo_full_name, WEBHOOK_NAME, 
+    github_client.create_hook(repo_full_name(owner, repo_name), WEBHOOK_NAME, 
                               webhooks_config, webhooks_options)
   end
 
@@ -53,6 +52,10 @@ class Github
         secret: webhook_secret,
         insecure_ssl: true
       }
+    end
+
+    def repo_full_name(owner, repo)
+      "#{owner}/#{repo}"
     end
 
 end
