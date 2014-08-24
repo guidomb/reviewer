@@ -15,5 +15,9 @@
 /log/*.log
 /tmp
 
+# Credentials
 .env
 secrets.yml
+
+# Binary & tools
+ngrok
