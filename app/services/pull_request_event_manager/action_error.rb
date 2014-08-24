@@ -1,22 +1,14 @@
-class PullRequestEventManager
+class PullRequestEventManager::ActionError < ArgumentError
 
-  class ActionError < ArgumentError
+  attr_reader :action
 
-    attr_accesible :action
-
-    def initialize(action)
-      super "#{error_type} action #{action}"
-      @action = action
-    end
-
-    def error_type
-      self.class.name.match(/(.*)ActionError/)[1]
-    end
-
+  def initialize(action)
+    super "#{error_type} action #{action}"
+    @action = action
   end
 
-  class UnsupportedActionError < ActionError; ; end
-
-  class InvalidActionError < ActionError; ; end 
+  def error_type
+    self.class.name.match(/(.*)ActionError/)[1]
+  end
 
 end
