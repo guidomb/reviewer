@@ -19,15 +19,15 @@ class Github::PullRequestEventManager
     dispatch_pull_request_event(action, payload)
   end
 
+  def valid_action?(action)
+    ACTIONS.include?(action)
+  end
+
+  def supported_action?(action)
+    SUPPORTED_ACTIONS.include?(action)
+  end
+
   private
-
-    def valid_action?(action)
-      ACTIONS.include?(action)
-    end
-
-    def supported_action?(action)
-      SUPPORTED_ACTIONS.include?(action)
-    end
 
     def dispatch_pull_request_event(action, payload)
       action_handler(action).handle(payload)
