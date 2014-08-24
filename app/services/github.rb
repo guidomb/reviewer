@@ -38,7 +38,7 @@ class Github
   private
 
     def validate_github_client(github_client)
-      raise InvalidAgumentError, "Github client cannot be nil" unless github_client
+      raise ArgumentError, "Github client cannot be nil" unless github_client
       github_client
     end
 

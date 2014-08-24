@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'coffee-rails', '~> 4.0.0'
+gem 'github_webhook'
 gem 'haml'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
@@ -20,10 +21,14 @@ group :development do
   gem 'spring-commands-rspec'
 end
 
+group :test do
+  gem 'database_cleaner'
+  gem 'rspec-rails', '~> 3.0.0'
+end
+
 group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.0.0'
 end
