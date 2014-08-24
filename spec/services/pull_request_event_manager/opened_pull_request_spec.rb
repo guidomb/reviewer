@@ -1,14 +1,11 @@
 require 'spec_helper'
 
-OpenedPullRequest = Github::PullRequestEventManager::OpenedPullRequest
-PullRequestAlreadyOpenedError = Github::PullRequestEventManager::PullRequestAlreadyOpenedError
-
-describe OpenedPullRequest do
+describe PullRequestEventManager::OpenedPullRequest do
 
   let(:payload) { load_json_fixture('opened_pull_request') }
   let(:repository) { payload['repository']['full_name'] }
   let(:number) { payload['number'] }
-  subject(:manager) { OpenedPullRequest.new(payload) }
+  subject(:manager) { PullRequestEventManager::OpenedPullRequest.new(payload) }
 
   describe "#handle_event" do
 
@@ -20,7 +17,8 @@ describe OpenedPullRequest do
 
       before(:each) { create(:pull_request, number: number, repository: repository) }
 
-      specify { expect { manager.handle_event }.to raise_error(PullRequestAlreadyOpenedError) }
+      specify { expect { manager.handle_event }.to(
+        raise_error(PullRequestEventManager::PullRequestAlreadyOpenedError)) }
 
     end
 

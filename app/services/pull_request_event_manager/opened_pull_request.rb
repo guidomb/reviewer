@@ -1,4 +1,4 @@
-class Github::PullRequestEventManager::OpenedPullRequest
+class PullRequestEventManager::OpenedPullRequest
 
   attr_reader :payload
 
@@ -50,7 +50,7 @@ class Github::PullRequestEventManager::OpenedPullRequest
     end
 
     def pull_request_already_opened_error
-      PullRequestAlreadyOpenedError.new(number, repository_name, payload)
+      ::PullRequestEventManager::PullRequestAlreadyOpenedError.new(number, repository_name, payload)
     end
 
 end

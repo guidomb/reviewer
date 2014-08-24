@@ -1,4 +1,4 @@
-class Github::PullRequestEventManager::PullRequestAlreadyOpenedError < StandardError
+class PullRequestEventManager::PullRequestAlreadyOpenedError < StandardError
 
   attr_reader :number, :repository, :payload
 

@@ -1,4 +1,4 @@
-class Github::PullRequestEventManager
+class PullRequestEventManager
 
   VALID_ACTIONS = %w(
     assigned
