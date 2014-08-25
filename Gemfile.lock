@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/guidomb/github_webhook.git
+  revision: 14a35c84e194ce8c83f30e67ff42b3be42e6073a
+  specs:
+    github_webhook (0.2.0)
+      activesupport (~> 4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -59,8 +66,6 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    github_webhook (0.2.0)
-      activesupport (~> 4)
     haml (4.0.5)
       tilt
     hike (1.2.3)
@@ -175,7 +180,7 @@ DEPENDENCIES
   database_cleaner
   dotenv-rails
   factory_girl_rails
-  github_webhook
+  github_webhook!
   haml
   jbuilder (~> 2.0)
   jquery-rails

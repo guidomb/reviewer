@@ -7,14 +7,14 @@ module JSONFixture
   private 
 
     def read_fixture(fixture)
-      File.read(fixture_path(fixture))
+      File.read(json_fixture_path(fixture))
     end
 
-    def fixture_path(fixture)
-      json_fixtures_path.join("#{fixture}.json")
+    def json_fixture_path(fixture)
+      base_json_fixture_path.join("#{fixture}.json")
     end
 
-    def json_fixtures_path
+    def base_json_fixture_path
       Rails.root.join(*%w(spec support json_fixtures))
     end
 

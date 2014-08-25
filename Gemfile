@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'coffee-rails', '~> 4.0.0'
-gem 'github_webhook'
+gem 'github_webhook', github: 'guidomb/github_webhook'
 gem 'haml'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
